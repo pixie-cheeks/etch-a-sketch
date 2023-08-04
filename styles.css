@@ -8,4 +8,18 @@ body {
 	min-height: 100vh;
 	margin: 0 auto;
 	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.container {
+	min-height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.square {
+	height: 50px;
+	width: 50px;
+	border: 2px solid black;
 }
