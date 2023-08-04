@@ -2,17 +2,24 @@ const container = document.createElement('div');
 container.classList = 'container';
 
 for (i = 0; i < 16; i++) {
-	/* 	const square = document.createElement('div');
-		square.classList = 'square';
-		container.appendChild(square); */
-	const rowWrapper = document.createElement('div');
-	rowWrapper.classList = 'row-wrapper';
+	const columnWrapper = document.createElement('div');
+	columnWrapper.classList = 'column-wrapper';
 	for (j = 0; j < 16; j++) {
 		const square = document.createElement('div');
 		square.classList = 'square';
-		rowWrapper.append(square);
+		columnWrapper.append(square);
 	}
-	container.append(rowWrapper);
+	container.append(columnWrapper);
 }
 
 document.body.append(container);
+
+function hoverEffect(event) {
+	event.target.classList.add('hover');
+}
+
+const rowWrappers = document.querySelectorAll('.column-wrapper');
+rowWrappers.forEach(squareDiv => {
+	squareDiv.addEventListener('mouseover', hoverEffect);
+	// squareDiv.addEventListener('mouseleave', removeHoverEffect);
+});

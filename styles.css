@@ -9,17 +9,27 @@ body {
 	margin: 0 auto;
 	width: 100%;
 	display: flex;
-	justify-content: center;
-}
-.container {
-	min-height: 100%;
-	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
+.container {
+	min-height: 640px;
+	min-width: 640px;
+	display: flex;
+}
+
+.column-wrapper {
+	flex: 1 auto;
+	display: flex;
+	flex-direction: column;
+}
 
 .square {
-	height: 50px;
-	width: 50px;
+	flex: 1 auto;
 	border: 2px solid black;
+}
+
+.hover {
+	background-color: pink;
 }
