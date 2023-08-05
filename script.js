@@ -29,8 +29,13 @@ function changeGrid(squaresPerSide) {
 	setEventListeners();
 }
 
+function randomNumber() {
+	return Math.floor(Math.random() * 256);
+}
+
 function hoverEffect(event) {
-	event.target.classList.add('hover');
+	let rgbValue = `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`;
+	event.target.style.backgroundColor = rgbValue;
 }
 
 function manageSlider(event) {
@@ -44,11 +49,14 @@ function manageSlider(event) {
 function inputValidation(event) {
 	if (isNaN(+event.target.value)) {
 		validationText.textContent = 'Only numbers are allowed.';
-	} else if (event.target.value === '') {
+	} else if (+event.target.value < 1) {
 		slider.value = event.target.value = 1;
 		changeGrid(1);
-	} else if (+event.target.value < 1 || +event.target.value > 100) {
-		validationText.textContent = 'Only numbers between 1 & 100 are allowed.';
+		event.target.blur();
+	} else if (+event.target.value > 100) {
+		slider.value = event.target.value = 100;
+		changeGrid(100);
+		event.target.blur();
 	} else {
 		validationText.textContent = '';
 	}
@@ -68,11 +76,13 @@ const validationText = document.querySelector('.input-validation');
 slider.addEventListener('input', manageSlider);
 sliderText.addEventListener('input', inputValidation);
 sliderText.addEventListener('blur', event => {
-	slider.value = event.target.value;
-	changeGrid(slider.value);
+	if (validationText.textContent === '') {
+		slider.value = event.target.value;
+		changeGrid(slider.value);
+	}
 });
 sliderText.addEventListener('keydown', event => {
-	if (event.key === 'Enter') {
+	if (event.key === 'Enter' && validationText.textContent === '') {
 		slider.value = event.target.value;
 		changeGrid(slider.value);
 		sliderText.blur();
