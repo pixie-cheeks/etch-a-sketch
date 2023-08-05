@@ -58,21 +58,6 @@ h1 {
 	margin: 20px 0;
 }
 
-/* .text-input {
-	border: 1px solid black;
-	background-color: white;
-	padding: 8px;
-	color: rgb(99, 113, 238);
-	box-shadow: 1px 1px 1px blue;
-	height: 50px;
-	width: 50px;
-	font-size: 20px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-} */
-
 .text-input {
 	border: 1px solid black;
 	padding: 8px;
