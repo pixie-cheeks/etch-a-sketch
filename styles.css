@@ -35,11 +35,6 @@ body {
 
 .square {
 	flex: 1 auto;
-	/* border: 2px solid black; */
-}
-
-.hover {
-	background-color: pink;
 }
 
 h1 {

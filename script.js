@@ -33,9 +33,56 @@ function randomNumber() {
 	return Math.floor(Math.random() * 256);
 }
 
+function numFromRGB(string) {
+	return string.replace(/\D+/g, ' ').trim().split(' ');
+}
+
+function decimalLength(numberString) {
+	return numberString.replace(/\d+\.?(\d*)/, '$1').length;
+}
+
+function deciMath(num1, num2, operand) {
+	let numOne = num1.toString();
+	let numTwo = num2.toString();
+
+	let precision = 1;
+	if (decimalLength(numOne) > decimalLength(numTwo)) {
+		precision += decimalLength(numOne); 
+	} else {
+		precision += decimalLength(numTwo);
+	}
+
+	switch (operand) {
+		case '+':
+			return (numOne * 10 ** precision + numTwo * 10 ** precision) / 10 ** precision;
+		case '-':
+			console.log(precision);
+			return (numOne * 10 ** precision - numTwo * 10 ** precision) / 10 ** precision;
+		case '*':
+			return (numOne * 10 ** precision * numTwo * 10 ** precision) / 10 ** precision;
+		case '/':
+			return (numOne * 10 ** precision / numTwo * 10 ** precision) / 10 ** precision;
+		default: 
+			return 'error from decMath';
+	}
+}
+
 function hoverEffect(event) {
-	let rgbValue = `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`;
-	event.target.style.backgroundColor = rgbValue;
+	const squareDiv = event.target;
+	if (!squareDiv.classList.contains('activated')) {
+		let rgbValue = `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`;
+		squareDiv.style.backgroundColor = rgbValue;
+		squareDiv.classList.add('activated');
+		squareDiv.id = numFromRGB(rgbValue).map(element => element / 10).join('-');
+	} else {
+		let subtractArray = squareDiv.id.split('-');
+		let rgbArray = numFromRGB(squareDiv.style.backgroundColor);
+		let newRGB = `rgb(${deciMath(rgbArray[0], subtractArray[0], '-')},` +
+			` ${deciMath(rgbArray[1], subtractArray[1], '-')},` +
+			` ${deciMath(rgbArray[2], subtractArray[2], '-')})`;
+		squareDiv.style.backgroundColor = newRGB;
+		console.log(newRGB);
+	}
 }
 
 function manageSlider(event) {
